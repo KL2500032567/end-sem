@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device width, intial-scale=1.0">
+        <title>Web Storage Example</title>
+        <script>
+            function saveData() {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+            }
+
+            function loadData() {
+                var username = localStorage.getItem("username");
+                var password = localStorage.getItem("password");
+                document.getElementById("username").value = username;
+                document.getElementById("password").value = password;
+            }
+
+            function clearData() {
+                localStorage.clear();
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+            }
+        </script>
+        <table borded="1" align="center" width="50%">
+            <tr>
+                <th> UserName</th>
+                <td><input type="text" id="username"></td>
+            </tr>
+            <tr>
+                <td> <input type="password" id="password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button onclick="saveData()">Save Data</button>
+                    <button onclick="LoadData()">Load Data</button>
+                    <button onclick="ClearData()">Clear Data</button>
+                </td>
+                <table></table>
+            </tr>
+        </table>
+    </head>
+</html>

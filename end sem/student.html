@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #263c78;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #263c78;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #263c78;
+            color: white;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #263c78;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Component -->
+    <header>
+        <h1>Student Management System</h1>
+        <p>Welcome to Student Details Portal</p>
+    </header>
+
+    <!-- Student List Component -->
+    <div class="container">
+
+        <h2>Student List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Marks</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentTable">
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Footer Component -->
+    <footer>
+        <p>© 2026 Student Management System</p>
+        <p>All Rights Reserved</p>
+    </footer>
+
+    <script>
+
+        // Student Data
+        const students = [
+            { id: 1, name: "Ravi", marks: 85 },
+            { id: 2, name: "Priya", marks: 45 },
+            { id: 3, name: "Kiran", marks: 72 },
+            { id: 4, name: "Sita", marks: 30 },
+            { id: 5, name: "Arjun", marks: 90 }
+        ];
+
+        // Student List Rendering using map()
+        const studentTable = document.getElementById("studentTable");
+
+        students.map(function(student) {
+
+            // Conditional Rendering
+            let result;
+
+            if (student.marks >= 40) {
+                result = "PASS";
+            } else {
+                result = "FAIL";
+            }
+
+            let statusClass = student.marks >= 40 ? "pass" : "fail";
+
+            studentTable.innerHTML += `
+                <tr>
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.marks}</td>
+                    <td class="${statusClass}">${result}</td>
+                </tr>
+            `;
+        });
+
+    </script>
+
+</body>
+</html>
+

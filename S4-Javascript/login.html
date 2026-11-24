@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Login</h2>
+            <p class="subtitle">
+                Login to your account
+            </p>
+            <form action="" id="loginForm">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="" id="email" placeholder="Enter email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="" id="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit">Login</button>
+                <p id="message"></p>
+            </form>
+            <p class="login-link">
+                Don't have an Account? <a href="register.html">Register</a>
+            </p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let msg= document.getElementById("message");
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            // Check whether the user is already registered or not
+            let excistingUser = users.find(user => user.email === email && user.password === password);
+            if (excistingUser) {
+                msg.innerHTML = "Login successful.";
+                msg.className = "success";
+                // Redirect to dashboard or home page
+                window.location.href = "dashboard.html"; // Change this to your desired page
+            } else {
+                msg.innerHTML = "Invalid email or password.";
+                msg.className = "error";
+            }
+        });

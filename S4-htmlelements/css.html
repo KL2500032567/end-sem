@@ -1,0 +1,120 @@
+CSS and Its Types
+---------------------
+CSS (Cascading Style Sheets) is a stylesheet language used to control the appearance, layout, colors, fonts, spacing, and responsiveness of HTML web pages.
+
+CSS separates the content (HTML) from its presentation (CSS).
+Basic CSS Syntax
+Example:
+Here:
+p → selector
+color and font-size → properties
+blue and 20px → values
+Types of CSS
+There are three main ways to apply CSS:
+
+1. Inline CSS
+selector {
+property: value;
+}
+p {
+color: blue;
+font-size: 20px;
+}
+
+2. Internal CSS
+3. External CSS
+
+1. Inline CSS
+In Inline CSS, the style is written directly inside the HTML element using the
+style attribute.
+Example
+Advantages
+Very easy to apply.
+Useful for styling a single HTML element.
+Quick for testing.
+Disadvantages
+Difficult to maintain for large websites.
+CSS and HTML become mixed.
+Cannot be easily reused.
+
+2. Internal CSS
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inline CSS</title>
+</head>
+<body>
+<h1 style="color: blue; text-align: center;">
+Welcome to CSS
+</h1>
+<p style="font-size: 18px; color: green;">
+This paragraph uses Inline CSS.
+</p>
+</body>
+</html>
+HTML
+In Internal CSS, CSS rules are written inside the <style> element within the
+<head> section of an HTML document.
+Example
+Advantages
+CSS is separated from individual HTML elements.
+Easy to use when styling a single webpage.
+No separate CSS file is required.
+Disadvantages
+Styles cannot be easily reused across multiple HTML pages.
+Large HTML files can become difficult to maintain.
+
+3. External CSS
+In External CSS, CSS rules are stored in a separate .css file and linked to
+the HTML document.
+This is the most commonly recommended approach for larger websites.
+HTML File: index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internal CSS</title>
+<style>
+h1 {
+color: red;
+text-align: center;
+}
+p {
+color: green;
+font-size: 18px;
+}
+</style>
+</head>
+HTML
+CSS File: style.css
+Advantages
+CSS can be reused across many webpages.
+Easier to maintain.
+HTML remains clean and readable.
+Suitable for large websites.
+Changes to one CSS file can affect multiple webpages.
+<!DOCTYPE html>
+<html>
+<head>
+<title>External CSS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Welcome to CSS</h1>
+<p>This paragraph uses External CSS.</p>
+<button>Click Me</button>
+</body>
+</html>
+h1 {
+color: blue;
+text-align: center;
+}
+p {
+color: green;
+font-size: 18px;
+}
+button {
+background-color: black;
+color: white;
+padding: 10px 20px;
+border: none;
+}

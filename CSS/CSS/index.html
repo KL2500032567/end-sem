@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastBites | Food Delivery</title>
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* --- Navigation Bar (Flexbox) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 15px 8%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff4757;
+        }
+
+        /* --- Promo Banner Section --- */
+        .promo-banner {
+            background: linear-gradient(135px, #ff6b81, #ff4757);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin: 20px 8%;
+            border-radius: 12px;
+        }
+
+        .promo-banner h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        /* --- Restaurant Categories (Flexbox) --- */
+        .categories-section {
+            padding: 20px 8%;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .categories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .category-badge {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .category-badge:hover, .category-badge.active {
+            background-color: #ff4757;
+            color: white;
+        }
+
+        /* --- Food Grid (CSS Grid) --- */
+        .food-section {
+            padding: 20px 8%;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* --- Food Card & Hover Transitions --- */
+        .food-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        /* Card Hover Effect */
+        .food-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .food-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .offer-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #2ed573;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .food-info {
+            padding: 15px;
+        }
+
+        .food-name {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .restaurant-name {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .food-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2f3542;
+        }
+
+        .order-btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #e84118;
+        }
+
+        /* --- Footer Section --- */
+        footer {
+            background-color: #2f3542;
+            color: white;
+            padding: 40px 8% 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: #ff4757;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ced6e0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #57606f;
+            font-size: 14px;
+            color: #a4b0be;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">🍕 FastBites</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- 2. Offers Banner -->
+    <div class="promo-banner">
+        <h2>🎉 Mega Weekend Sale! 🎉</h2>
+        <p>Get up to 50% OFF on your favorite meals. Use code: <strong>FIRST50</strong></p>
+    </div>
+
+    <!-- 3. Restaurant Categories -->
+    <section class="categories-section">
+        <h3 class="section-title">In the Mood for?</h3>
+        <div class="categories-container">
+            <div class="category-badge active">All Foods</div>
+            <div class="category-badge">🍔 Burgers</div>
+            <div class="category-badge">🍕 Pizza</div>
+            <div class="category-badge">🍜 Noodles</div>
+            <div class="category-badge">🍰 Desserts</div>
+            <div class="category-badge">🥤 Beverages</div>
+        </div>
+    </section>
+
+    <!-- 4. Food Cards Container -->
+    <section class="food-section">
+        <h3 class="section-title">Popular Dishes Near You</h3>
+        
+        <div class="food-grid">
+            <!-- Card 1 -->
+            <div class="food-card">
+                <span class="offer-tag">50% OFF</span>
+                <img src="https://unsplash.com" alt="Cheeseburger" class="food-img">
+                <div class="food-info">
+                    <h4 class="food-name">Classic Cheeseburger</h4>
+                    <p class="restaurant-name">Burger Kingpin • American</p>
+                    <div class="food-footer">
+                        <span class="price">$8.99</span>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="food-card">
+                <span class="offer-tag">Buy 1 Get 1</span>
+                <img src="https://unsplash.com" alt="Pizza" class="food-img">
+                <div class="food-info">
+                    <h4 class="food-name">Pepperoni Feast Pizza</h4>
+                    <p class="restaurant-name">Pizza Planet • Italian</p>
+                    <div class="food-footer">
+                        <span class="price">$14.49</span>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="food-card">
+                <img src="https://unsplash.com" alt="Ramen" class="food-img">
+                <div class="food-info">
+                    <h4 class="food-name">Spicy Chicken Ramen</h4>
+                    <p class="restaurant-name">Ninja Noodles • Asian</p>
+                    <div class="food-footer">
+                        <span class="price">$11.25</span>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="food-card">
+                <span class="offer-tag">Free Delivery</span>
+                <img src="https://unsplash.com" alt="Cupcakes" class="food-img">
+                <div class="food-info">
+                    <h4 class="food-name">Velvet Berry Cupcakes</h4>
+                    <p class="restaurant-name">Sweet Treat Bakery</p>
+                    <div class="food-footer">
+                        <span class="price">$6.00</span>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- 5. Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <!-- About Section -->
+            <div class="footer-section">
+                <h3>FastBites</h3>
+                <p>Delivering fresh, delicious food straight to your doorstep in minutes.</p>
+            </div>
+            
+            <!-- Quick Links (Flexbox/List Layout) -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Available Cities</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact details -->
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>📍 123 Foodie Street, Flavor Town</li>
+                    <li>📞 +1 (555) 987-6543</li>
+                    <li>✉️ support@fastbites.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            &copy; 2026 FastBites. All rights reserved. Built for Exam Purposes.
+        </div>
+    </footer>
+</body>
+</html>

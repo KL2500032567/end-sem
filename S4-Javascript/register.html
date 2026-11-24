@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+</head>
+<body>
+    <body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Create Account</h2>
+            <p class="subtitle">Register to get started</p>
+            <form id="registerForm" action="" method="get">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="" id="name" placeholder="Enter Full Name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">EMail</label>
+                    <input type="email" name="" id="email" placeholder="abc@xyz.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="" id="password" placeholder="Enter Password" required>
+                </div>
+                <div class="input-group">
+                    <label for="cnfpassword">Password</label>
+                    <input type="password" name="" id="cnfpassword" placeholder="Enter Confirm Password" required>
+                </div>
+                <button type="submit">Register</button>
+                <p id="message"></p>
+            </form>
+            <p class="login-link">
+                Already have a Account? <a href="login.html">Login</a>
+            </p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let cnfpassword = document.getElementById("cnfpassword").value;
+            let msg= document.getElementById("message");
+
+            //check if password and confirm password match
+
+            if(pass !== cnfpass){
+                msg.innerHTML = "Password and Confirm Password doesn't' match.";
+                msg.className = "error";
+                return;
+        
+            }
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            // Check whether the user is already registered or not
+            let excistingUser = users.find(user => user.email === email);
+            if (excistingUser) {
+                msg.innerHTML = "User already registered. Please login.";
+                msg.className = "error";
+                return;
+            }
+            //Create a new user
+            let newUser = { name, email, password };
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+            msg.innerHTML = "Registration successful. Please login.";
+            msg.className = "success";
+
+            //Creat a New User
+            let user = {
+                name: name,
+                email: email,
+                password: pass
+
+            }
+            users.push(user);
+            localStorage.setItem("users", JSON.stringify(users));
+            msg.innerHTML = "Registration successful. Please login.";
+            msg.className = "success";
+
+            //clear the form 
+            document.getElementById("registerForm").reset();
+
+            //redirect to login Form
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1500);
+
+        });
+    </script>
+</body>
+</html>
